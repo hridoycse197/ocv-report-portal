@@ -1,0 +1,412 @@
+import 'package:flutter/material.dart';
+
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({super.key});
+
+  @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
+  int _selectedMenuIndex = 0;
+  bool _isDarkMode = false;
+
+  final List<MenuOption> _menuOptions = [
+    MenuOption(title: 'ড্যাশবোর্ড', icon: Icons.dashboard),
+    MenuOption(title: 'রিপোর্ট', icon: Icons.description),
+    MenuOption(title: 'সেটিংস', icon: Icons.settings),
+  ];
+
+  // Breakpoint for showing sidebar as drawer
+  static const double _sidebarBreakpoint = 800;
+
+  void _toggleTheme() {
+    setState(() {
+      _isDarkMode = !_isDarkMode;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < _sidebarBreakpoint;
+
+    return Theme(
+      data: _isDarkMode ? _darkTheme : _lightTheme,
+      child: Scaffold(
+        backgroundColor: _isDarkMode ? Colors.grey.shade900 : Colors.grey.shade100,
+        // Conditionally add drawer only on mobile/tablet
+        drawer: isMobile ? _buildDrawer(context) : null,
+        appBar: isMobile
+            ? AppBar(
+                backgroundColor: _isDarkMode ? Colors.grey.shade900 : Colors.white,
+                title: Text(
+                  'ওসিভি পোর্টাল',
+                  style: TextStyle(
+                    color: _isDarkMode ? Colors.white : Colors.black87,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                iconTheme: IconThemeData(
+                  color: _isDarkMode ? Colors.white : Colors.black87,
+                ),
+                elevation: 0,
+              )
+            : null,
+        body: isMobile
+            ? _buildContent(context)
+            : Row(
+                children: [
+                  // Left Sidebar Menu (desktop only)
+                  _buildSidebar(context),
+                  // Main Content Area
+                  Expanded(child: _buildContent(context)),
+                ],
+              ),
+      ),
+    );
+  }
+
+  static final ThemeData _lightTheme = ThemeData(
+    brightness: Brightness.light,
+    useMaterial3: true,
+  );
+
+  static final ThemeData _darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    useMaterial3: true,
+  );
+
+  Widget _buildSidebar(BuildContext context) {
+    return Container(
+      width: 250,
+      decoration: BoxDecoration(
+        color: _isDarkMode ? Colors.grey.shade900 : Colors.white,
+        border: Border(
+          right: BorderSide(
+            color: _isDarkMode ? Colors.grey.shade800 : Colors.grey.shade300,
+            width: 1,
+          ),
+        ),
+      ),
+      child: Column(
+        children: [
+          // Header
+          Container(
+            padding: const EdgeInsets.all(20),
+            child: Text(
+              'ওসিভি পোর্টাল',
+              style: TextStyle(
+                color: _isDarkMode ? Colors.white : Colors.black87,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const Divider(height: 1),
+          // Menu Items
+          ...List.generate(_menuOptions.length, (index) {
+            final isSelected = _selectedMenuIndex == index;
+            return _buildMenuItem(
+              context,
+              _menuOptions[index],
+              isSelected,
+              () => setState(() => _selectedMenuIndex = index),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDrawer(BuildContext context) {
+    return Drawer(
+      child: Container(
+        color: _isDarkMode ? Colors.grey.shade900 : Colors.white,
+        child: Column(
+          children: [
+            // Header
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: _isDarkMode ? Colors.grey.shade900 : Colors.white,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    'ওসিভি পোর্টাল',
+                    style: TextStyle(
+                      color: _isDarkMode ? Colors.white : Colors.black87,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(height: 1),
+            // Menu Items
+            ...List.generate(_menuOptions.length, (index) {
+              final isSelected = _selectedMenuIndex == index;
+              return _buildMenuItem(
+                context,
+                _menuOptions[index],
+                isSelected,
+                () {
+                  setState(() => _selectedMenuIndex = index);
+                  Navigator.pop(context); // Close drawer after selection
+                },
+              );
+            }),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMenuItem(
+    BuildContext context,
+    MenuOption option,
+    bool isSelected,
+    VoidCallback onTap,
+  ) {
+    final primaryColor = _isDarkMode ? Colors.blue.shade300 : Colors.blue.shade700;
+
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? primaryColor.withValues(alpha: 0.15)
+              : Colors.transparent,
+          border: Border(
+            left: BorderSide(
+              color: isSelected ? primaryColor : Colors.transparent,
+              width: 3,
+            ),
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              option.icon,
+              color: isSelected
+                  ? primaryColor
+                  : (_isDarkMode ? Colors.white70 : Colors.black54),
+              size: 22,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                option.title,
+                style: TextStyle(
+                  color: isSelected
+                      ? primaryColor
+                      : (_isDarkMode ? Colors.white : Colors.black87),
+                  fontSize: 14,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
+    return Container(
+      color: _isDarkMode ? Colors.grey.shade900 : Colors.grey.shade100,
+      child: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          // Page Header
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                child: Text(
+                  _menuOptions[_selectedMenuIndex].title,
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: _isDarkMode ? Colors.white : Colors.black87,
+                  ),
+                ),
+              ),
+              // Theme Toggle Button
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                child: IconButton(
+                  onPressed: _toggleTheme,
+                  icon: Icon(
+                    _isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                    color: _isDarkMode ? Colors.white : Colors.black54,
+                    size: 24,
+                  ),
+                  tooltip: _isDarkMode ? 'লাইট মোড' : 'ডার্ক মোড',
+                  style: IconButton.styleFrom(
+                    backgroundColor: _isDarkMode
+                        ? Colors.grey.shade800
+                        : Colors.grey.shade200,
+                    padding: const EdgeInsets.all(12),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          // Cards Grid
+          LayoutBuilder(
+            builder: (context, constraints) {
+              // Responsive crossAxisCount based on screen width
+              int crossAxisCount = 4;
+              if (constraints.maxWidth < 600) {
+                crossAxisCount = 1;
+              } else if (constraints.maxWidth < 900) {
+                crossAxisCount = 2;
+              } else if (constraints.maxWidth < 1200) {
+                crossAxisCount = 3;
+              }
+
+              return GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 1.6,
+                ),
+                itemCount: 100,
+                itemBuilder: (context, index) => _StatCard(index: index),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StatCard extends StatelessWidget {
+  final int index;
+
+  const _StatCard({required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: isDark ? Colors.grey.shade800 : Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Card Header with Badge
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+              decoration: BoxDecoration(
+                color: Colors.green.shade50,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Text(
+                'অনুমোদিত',
+                style: TextStyle(
+                  color: Colors.green.shade700,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(height: 6),
+            // Approved Count
+            Text(
+              '১,৫২৮,১৩১',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: isDark ? Colors.white : Colors.black87,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 8),
+            // OCV Label
+            Text(
+              'ওসিভি',
+              style: TextStyle(
+                fontSize: 11,
+                color: isDark ? Colors.white60 : Colors.grey.shade600,
+                fontWeight: FontWeight.w500,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 2),
+            // OCV Value
+            Text(
+              '৭৬৭,২৩৩',
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Colors.blue,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 6),
+            // ICPV Label
+            Text(
+              'আইসিপিভি',
+              style: TextStyle(
+                fontSize: 11,
+                color: isDark ? Colors.white60 : Colors.grey.shade600,
+                fontWeight: FontWeight.w500,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 2),
+            // ICPV Value
+            Text(
+              '৭৬০,৮৯৮',
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Colors.orange,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MenuOption {
+  final String title;
+  final IconData icon;
+
+  MenuOption({required this.title, required this.icon});
+}

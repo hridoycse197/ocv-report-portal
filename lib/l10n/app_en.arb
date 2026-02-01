@@ -1,0 +1,51 @@
+{
+  "@@locale": "en",
+  "appTitle": "OCV Report Portal",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "ocvPortal": "OCV Portal",
+  "@ocvPortal": {
+    "description": "OCV Portal brand name"
+  },
+  "dashboard": "Dashboard",
+  "@dashboard": {
+    "description": "Dashboard menu item"
+  },
+  "report": "Report",
+  "@report": {
+    "description": "Report menu item"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings menu item"
+  },
+  "approved": "Approved",
+  "@approved": {
+    "description": "Approved status label"
+  },
+  "ocv": "OCV",
+  "@ocv": {
+    "description": "OCV label"
+  },
+  "icpv": "ICPV",
+  "@icpv": {
+    "description": "ICPV label"
+  },
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark mode toggle label"
+  },
+  "lightMode": "Light Mode",
+  "@lightMode": {
+    "description": "Light mode toggle label"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry button text"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error message title"
+  }
+}
