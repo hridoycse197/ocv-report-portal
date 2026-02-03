@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -43,7 +44,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   'ওসিভি পোর্টাল',
                   style: TextStyle(
                     color: _isDarkMode ? Colors.white : Colors.black87,
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -79,13 +80,13 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildSidebar(BuildContext context) {
     return Container(
-      width: 250,
+      width: 250.w,
       decoration: BoxDecoration(
         color: _isDarkMode ? Colors.grey.shade900 : Colors.white,
         border: Border(
           right: BorderSide(
             color: _isDarkMode ? Colors.grey.shade800 : Colors.grey.shade300,
-            width: 1,
+            width: 1.w,
           ),
         ),
       ),
@@ -93,17 +94,17 @@ class _DashboardPageState extends State<DashboardPage> {
         children: [
           // Header
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20.w),
             child: Text(
               'ওসিভি পোর্টাল',
               style: TextStyle(
                 color: _isDarkMode ? Colors.white : Colors.black87,
-                fontSize: 22,
+                fontSize: 22.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          const Divider(height: 1),
+          Divider(height: 1.h),
           // Menu Items
           ...List.generate(_menuOptions.length, (index) {
             final isSelected = _selectedMenuIndex == index;
@@ -138,14 +139,14 @@ class _DashboardPageState extends State<DashboardPage> {
                     'ওসিভি পোর্টাল',
                     style: TextStyle(
                       color: _isDarkMode ? Colors.white : Colors.black87,
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
             ),
-            const Divider(height: 1),
+            Divider(height: 1.h),
             // Menu Items
             ...List.generate(_menuOptions.length, (index) {
               final isSelected = _selectedMenuIndex == index;
@@ -176,7 +177,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         decoration: BoxDecoration(
           color: isSelected
               ? primaryColor.withValues(alpha: 0.15)
@@ -184,7 +185,7 @@ class _DashboardPageState extends State<DashboardPage> {
           border: Border(
             left: BorderSide(
               color: isSelected ? primaryColor : Colors.transparent,
-              width: 3,
+              width: 3.w,
             ),
           ),
         ),
@@ -195,9 +196,9 @@ class _DashboardPageState extends State<DashboardPage> {
               color: isSelected
                   ? primaryColor
                   : (_isDarkMode ? Colors.white70 : Colors.black54),
-              size: 22,
+              size: 22.r,
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12.w),
             Expanded(
               child: Text(
                 option.title,
@@ -205,7 +206,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   color: isSelected
                       ? primaryColor
                       : (_isDarkMode ? Colors.white : Colors.black87),
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -221,18 +222,18 @@ class _DashboardPageState extends State<DashboardPage> {
     return Container(
       color: _isDarkMode ? Colors.grey.shade900 : Colors.grey.shade100,
       child: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w),
         children: [
           // Page Header
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: const EdgeInsets.only(bottom: 20),
+                margin: EdgeInsets.only(bottom: 20.h),
                 child: Text(
                   _menuOptions[_selectedMenuIndex].title,
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 28.sp,
                     fontWeight: FontWeight.bold,
                     color: _isDarkMode ? Colors.white : Colors.black87,
                   ),
@@ -240,20 +241,20 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
               // Theme Toggle Button
               Container(
-                margin: const EdgeInsets.only(bottom: 20),
+                margin: EdgeInsets.only(bottom: 20.h),
                 child: IconButton(
                   onPressed: _toggleTheme,
                   icon: Icon(
                     _isDarkMode ? Icons.light_mode : Icons.dark_mode,
                     color: _isDarkMode ? Colors.white : Colors.black54,
-                    size: 24,
+                    size: 24.r,
                   ),
                   tooltip: _isDarkMode ? 'লাইট মোড' : 'ডার্ক মোড',
                   style: IconButton.styleFrom(
                     backgroundColor: _isDarkMode
                         ? Colors.grey.shade800
                         : Colors.grey.shade200,
-                    padding: const EdgeInsets.all(12),
+                    padding: EdgeInsets.all(12.w),
                   ),
                 ),
               ),
@@ -277,8 +278,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12.w,
+                  mainAxisSpacing: 12.h,
                   childAspectRatio: 1.6,
                 ),
                 itemCount: 100,
@@ -304,93 +305,93 @@ class _StatCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: isDark ? Colors.grey.shade800 : Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.08),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            blurRadius: 8.r,
+            offset: Offset(0, 2.h),
           ),
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: EdgeInsets.all(12.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             // Card Header with Badge
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 3.h),
               decoration: BoxDecoration(
                 color: Colors.green.shade50,
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(4.r),
               ),
               child: Text(
                 'অনুমোদিত',
                 style: TextStyle(
                   color: Colors.green.shade700,
-                  fontSize: 10,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.w600,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            const SizedBox(height: 6),
+            SizedBox(height: 6.h),
             // Approved Count
             Text(
               '১,৫২৮,১৩১',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
                 color: isDark ? Colors.white : Colors.black87,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.h),
             // OCV Label
             Text(
               'ওসিভি',
               style: TextStyle(
-                fontSize: 11,
+                fontSize: 11.sp,
                 color: isDark ? Colors.white60 : Colors.grey.shade600,
                 fontWeight: FontWeight.w500,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 2),
+            SizedBox(height: 2.h),
             // OCV Value
             Text(
               '৭৬৭,২৩৩',
-              style: const TextStyle(
-                fontSize: 14,
+              style: TextStyle(
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
                 color: Colors.blue,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 6),
+            SizedBox(height: 6.h),
             // ICPV Label
             Text(
               'আইসিপিভি',
               style: TextStyle(
-                fontSize: 11,
+                fontSize: 11.sp,
                 color: isDark ? Colors.white60 : Colors.grey.shade600,
                 fontWeight: FontWeight.w500,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 2),
+            SizedBox(height: 2.h),
             // ICPV Value
             Text(
               '৭৬০,৮৯৮',
-              style: const TextStyle(
-                fontSize: 14,
+              style: TextStyle(
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
                 color: Colors.orange,
               ),

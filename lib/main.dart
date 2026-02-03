@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:ocv_report_portal/dashboard_page.dart';
+import 'package:ocv_report_portal/modules/dashboard/dashboard_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/theme/app_theme.dart';
 import 'modules/dashboard/dashboard_controller.dart';
-import 'modules/dashboard/dashboard_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,26 +27,33 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'ওসিভি রিপোর্ট পোর্টাল',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      // Enable transitions
-      defaultTransition: Transition.fadeIn,
-      opaqueRoute: Get.isOpaqueRouteDefault,
-      // Smart management
-      smartManagement: SmartManagement.full,
-      // Locale
-      locale: const Locale('bn', 'BD'), // Bengali locale
-      fallbackLocale: const Locale('en', 'US'),
-      // Home
-      home: const DashboardPage(),
-      // Bindings
-      initialBinding: BindingsBuilder(() {
-        Get.lazyPut<DashboardController>(() => DashboardController());
-      }),
+    return ScreenUtilInit(
+      designSize: const Size(1440, 900), // Design size for desktop/web
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return GetMaterialApp(
+          title: 'ওসিভি রিপোর্ট পোর্টাল',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.system,
+          // Enable transitions
+          defaultTransition: Transition.fadeIn,
+          opaqueRoute: Get.isOpaqueRouteDefault,
+          // Smart management
+          smartManagement: SmartManagement.full,
+          // Locale
+          locale: const Locale('bn', 'BD'), // Bengali locale
+          fallbackLocale: const Locale('en', 'US'),
+          // Home
+          home: const DashboardPage(),
+          // Bindings
+          initialBinding: BindingsBuilder(() {
+            Get.lazyPut<DashboardController>(() => DashboardController());
+          }),
+        );
+      },
     );
   }
 }
