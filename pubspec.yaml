@@ -49,6 +49,9 @@ dependencies:
   # Responsive UI
   flutter_screenutil: ^5.9.0
 
+  # Routing
+  go_router: ^14.6.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

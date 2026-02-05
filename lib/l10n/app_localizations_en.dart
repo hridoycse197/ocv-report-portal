@@ -43,4 +43,62 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get error => 'Error';
+
+  @override
+  String get reportOfficers => 'Active Election Duty Officers Report';
+
+  @override
+  String get reportOfficersDesc =>
+      'View polling officer registration statistics by district and upazila';
+
+  @override
+  String get viewReport => 'View Report';
+
+  @override
+  String get comingSoon => 'Coming Soon';
+
+  @override
+  String get reportGovtOfficers => 'Government Officers Report';
+
+  @override
+  String get reportGovtOfficersDesc =>
+      'View government officer registration statistics';
+
+  @override
+  String get reportAnsar => 'Ansar-BDP Report';
+
+  @override
+  String get reportAnsarDesc =>
+      'View Ansar and BDP personnel registration statistics';
+
+  @override
+  String get reportPrisoner => 'Prisoner Report';
+
+  @override
+  String get reportPrisonerDesc => 'View prisoner registration statistics';
+
+  @override
+  String get reportOverseas => 'Overseas Voters Report';
+
+  @override
+  String get reportOverseasDesc =>
+      'View overseas voter registration statistics';
+
+  @override
+  String get pageNotFound => 'Page Not Found';
+
+  @override
+  String get goToDashboard => 'Go to Dashboard';
+
+  @override
+  String get totalWorkers => 'Total Workers';
+
+  @override
+  String get totalRegistered => 'Registered';
+
+  @override
+  String get notRegistered => 'Not Registered';
+
+  @override
+  String get district => 'District';
 }

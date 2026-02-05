@@ -169,6 +169,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error'**
   String get error;
+
+  /// Report card title for election duty officers
+  ///
+  /// In en, this message translates to:
+  /// **'Active Election Duty Officers Report'**
+  String get reportOfficers;
+
+  /// Report card description for election duty officers
+  ///
+  /// In en, this message translates to:
+  /// **'View polling officer registration statistics by district and upazila'**
+  String get reportOfficersDesc;
+
+  /// View report button text
+  ///
+  /// In en, this message translates to:
+  /// **'View Report'**
+  String get viewReport;
+
+  /// Coming soon label
+  ///
+  /// In en, this message translates to:
+  /// **'Coming Soon'**
+  String get comingSoon;
+
+  /// Report card title for government officers
+  ///
+  /// In en, this message translates to:
+  /// **'Government Officers Report'**
+  String get reportGovtOfficers;
+
+  /// Report card description for government officers
+  ///
+  /// In en, this message translates to:
+  /// **'View government officer registration statistics'**
+  String get reportGovtOfficersDesc;
+
+  /// Report card title for Ansar and BDP
+  ///
+  /// In en, this message translates to:
+  /// **'Ansar-BDP Report'**
+  String get reportAnsar;
+
+  /// Report card description for Ansar-BDP
+  ///
+  /// In en, this message translates to:
+  /// **'View Ansar and BDP personnel registration statistics'**
+  String get reportAnsarDesc;
+
+  /// Report card title for prisoners
+  ///
+  /// In en, this message translates to:
+  /// **'Prisoner Report'**
+  String get reportPrisoner;
+
+  /// Report card description for prisoners
+  ///
+  /// In en, this message translates to:
+  /// **'View prisoner registration statistics'**
+  String get reportPrisonerDesc;
+
+  /// Report card title for overseas voters
+  ///
+  /// In en, this message translates to:
+  /// **'Overseas Voters Report'**
+  String get reportOverseas;
+
+  /// Report card description for overseas voters
+  ///
+  /// In en, this message translates to:
+  /// **'View overseas voter registration statistics'**
+  String get reportOverseasDesc;
+
+  /// 404 page title
+  ///
+  /// In en, this message translates to:
+  /// **'Page Not Found'**
+  String get pageNotFound;
+
+  /// Button text to navigate to dashboard
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Dashboard'**
+  String get goToDashboard;
+
+  /// Total workers label
+  ///
+  /// In en, this message translates to:
+  /// **'Total Workers'**
+  String get totalWorkers;
+
+  /// Total registered label
+  ///
+  /// In en, this message translates to:
+  /// **'Registered'**
+  String get totalRegistered;
+
+  /// Not registered label
+  ///
+  /// In en, this message translates to:
+  /// **'Not Registered'**
+  String get notRegistered;
+
+  /// District label
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get district;
 }
 
 class _AppLocalizationsDelegate

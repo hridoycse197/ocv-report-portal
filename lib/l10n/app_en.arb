@@ -47,5 +47,77 @@
   "error": "Error",
   "@error": {
     "description": "Error message title"
+  },
+  "reportOfficers": "Active Election Duty Officers Report",
+  "@reportOfficers": {
+    "description": "Report card title for election duty officers"
+  },
+  "reportOfficersDesc": "View polling officer registration statistics by district and upazila",
+  "@reportOfficersDesc": {
+    "description": "Report card description for election duty officers"
+  },
+  "viewReport": "View Report",
+  "@viewReport": {
+    "description": "View report button text"
+  },
+  "comingSoon": "Coming Soon",
+  "@comingSoon": {
+    "description": "Coming soon label"
+  },
+  "reportGovtOfficers": "Government Officers Report",
+  "@reportGovtOfficers": {
+    "description": "Report card title for government officers"
+  },
+  "reportGovtOfficersDesc": "View government officer registration statistics",
+  "@reportGovtOfficersDesc": {
+    "description": "Report card description for government officers"
+  },
+  "reportAnsar": "Ansar-BDP Report",
+  "@reportAnsar": {
+    "description": "Report card title for Ansar and BDP"
+  },
+  "reportAnsarDesc": "View Ansar and BDP personnel registration statistics",
+  "@reportAnsarDesc": {
+    "description": "Report card description for Ansar-BDP"
+  },
+  "reportPrisoner": "Prisoner Report",
+  "@reportPrisoner": {
+    "description": "Report card title for prisoners"
+  },
+  "reportPrisonerDesc": "View prisoner registration statistics",
+  "@reportPrisonerDesc": {
+    "description": "Report card description for prisoners"
+  },
+  "reportOverseas": "Overseas Voters Report",
+  "@reportOverseas": {
+    "description": "Report card title for overseas voters"
+  },
+  "reportOverseasDesc": "View overseas voter registration statistics",
+  "@reportOverseasDesc": {
+    "description": "Report card description for overseas voters"
+  },
+  "pageNotFound": "Page Not Found",
+  "@pageNotFound": {
+    "description": "404 page title"
+  },
+  "goToDashboard": "Go to Dashboard",
+  "@goToDashboard": {
+    "description": "Button text to navigate to dashboard"
+  },
+  "totalWorkers": "Total Workers",
+  "@totalWorkers": {
+    "description": "Total workers label"
+  },
+  "totalRegistered": "Registered",
+  "@totalRegistered": {
+    "description": "Total registered label"
+  },
+  "notRegistered": "Not Registered",
+  "@notRegistered": {
+    "description": "Not registered label"
+  },
+  "district": "District",
+  "@district": {
+    "description": "District label"
   }
 }

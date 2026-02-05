@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:ocv_report_portal/modules/dashboard/dashboard_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/theme/app_theme.dart';
+import 'l10n/app_localizations.dart';
 import 'modules/dashboard/dashboard_controller.dart';
+import 'router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // CRITICAL: Set URL strategy for clean URLs
+  // This enables URLs like /report instead of /#/report
+  setUrlStrategy(PathUrlStrategy());
+
   await initServices();
   runApp(const MyApp());
 }
@@ -32,26 +39,29 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return GetMaterialApp(
+        return MaterialApp.router(
           title: 'ওসিভি রিপোর্ট পোর্টাল',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeMode.system,
-          // Enable transitions
-          defaultTransition: Transition.fadeIn,
-          opaqueRoute: Get.isOpaqueRouteDefault,
-          // Smart management
-          smartManagement: SmartManagement.full,
-          // Locale
+
+          // Router configuration with go_router
+          routerConfig: router,
+
+          // Locale configuration (maintained for localization)
           locale: const Locale('bn', 'BD'), // Bengali locale
-          fallbackLocale: const Locale('en', 'US'),
-          // Home
-          home: const DashboardPage(),
-          // Bindings
-          initialBinding: BindingsBuilder(() {
-            Get.lazyPut<DashboardController>(() => DashboardController());
-          }),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+
+          // Bindings for GetX (maintained for existing controllers)
+          builder: (context, child) {
+            // Initialize GetX bindings
+            if (!Get.isRegistered<DashboardController>()) {
+              Get.lazyPut<DashboardController>(() => DashboardController());
+            }
+            return child!;
+          },
         );
       },
     );
